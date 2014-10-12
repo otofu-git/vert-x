@@ -4,7 +4,7 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/
 a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
 -->
 
-# Getting a distro
+# 배포판 얻기
 
 The easiest way to get hold of a distribution is to [download a binary distro](downloads.html).
 
