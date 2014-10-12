@@ -293,10 +293,8 @@
 <li><a href="#random-access-writes">Random access writes</a></li>
 <li><a href="#random-access-reads">Random access reads</a></li>
 <li><a href="#flushing-data-to-underlying-storage">Flushing data to underlying storage.</a></li>
-<li><a href="#using-asyncfile-as-readstream-and-writestream">Using AsyncFile as ReadStream and WriteStream</a></li>
+<li><a href="#using-asyncfile-as-readstream-and-writestream">Using AsyncFile as <code>ReadStream</code> and <code>WriteStream</code></a></li>
 <li><a href="#closing-an-asyncfile">Closing an AsyncFile</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a href="#dns-client">DNS Client</a><ul>
@@ -327,6 +325,8 @@
 <li><a href="#badsig">BADSIG</a></li>
 <li><a href="#badkey">BADKEY</a></li>
 <li><a href="#badtime">BADTIME</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -542,7 +542,8 @@ end
     puts 'Yippee! The handler unregister has been propagated across the cluster'
 end
 </pre>
-<p>If you want your handler to live for the full lifetime of your verticle there is no need to unregister it explicitly - vert.x will automatically unregister any handlers when the verticle is stopped.  </p>
+<p>If you want your handler to live for the full lifetime of your verticle there is no need to unregister it explicitly - vert.x will automatically unregister any handlers when the verticle is stopped.<br/>
+</p>
 <h3 id="publishing-messages">Publishing messages</h3><br/>
 <p>Publishing a message is also trivially easy. Just publish it specifying the address, for example:</p>
 <pre class="prettyprint">Vertx::EventBus.publish("test.address", 'hello world')
@@ -607,7 +608,8 @@ Vertx::EventBus.send('test.address', myObj)
 <h2 id="distributed-event-bus">Distributed event bus</h2><br/>
 <p>To make each Vert.x instance on your network participate on the same event bus, start each Vert.x instance with the <code>-cluster</code> command line switch.</p>
 <p>See the chapter in the main manual on <a href=""><em>running Vert.x</em></a> for more information on this. </p>
-<p>Once you've done that, any Vert.x instances started in cluster mode will merge to form a distributed event bus.  </p>
+<p>Once you've done that, any Vert.x instances started in cluster mode will merge to form a distributed event bus.<br/>
+</p>
 <h1 id="shared-data">Shared Data</h1><br/>
 <p>Sometimes it makes sense to allow different verticles instances to share data in a safe way. Vert.x allows simple <em>Hash</em> and <em>Set</em> data structures to be shared between verticles.</p>
 <p>There is a caveat: Vert.x ensures that objects are copied where appropriate on insertion to prevent other verticles having access to the same instance which could lead to race conditions.</p>
@@ -751,7 +753,8 @@ str = buff.get_string(100, 110, 'UTF-16') # Get 10 bytes from pos 100 interprete
 <li><code>length</code>: To obtain the length of the buffer. The length of a buffer is the index of the byte in the buffer with the largest index + 1.</li>
 <li><code>copy</code>: Copy the entire buffer</li>
 </ul>
-<p>See the Yardoc for more detailed method level documentation.    </p>
+<p>See the Yardoc for more detailed method level documentation.  <br/>
+</p>
 <h1 id="delayed-and-periodic-tasks">Delayed and Periodic Tasks</h1><br/>
 <p>It's very common in vert.x to want to perform an action after a delay, or periodically.</p>
 <p>In standard verticles you can't just make the thread sleep to introduce a delay, as that will block the event loop thread.</p>
@@ -845,7 +848,8 @@ end.listen(1234, 'localhost')
    puts 'The server is now fully closed.' if !err
 end
 </pre>
-<p>In most cases you don't need to close a net server explicitly since vert.x will close them for you when the verticle stops.    </p>
+<p>In most cases you don't need to close a net server explicitly since vert.x will close them for you when the verticle stops.  <br/>
+</p>
 <h3 id="netserver-properties">NetServer Properties</h3><br/>
 <p>NetServer has a set of attributes you can set which affect its behaviour. Firstly there are bunch of attributes used to tweak the TCP parameters, in most cases you won't need to set these:</p>
 <ul>
@@ -1348,7 +1352,8 @@ server.request_handler do |request|
 
 end.listen(8080, 'localhost')
 </pre>
-<p>The default value for <code>status_code</code> is <code>200</code>.    </p>
+<p>The default value for <code>status_code</code> is <code>200</code>.  <br/>
+</p>
 <h4 id="writing-http-responses">Writing HTTP responses</h4><br/>
 <p>To write data to an HTTP response, you invoke the <code>write</code> or <code>write_str</code> methods. These methods can be invoked multiple times before the response is ended.</p>
 <p>With a single buffer:</p>
@@ -1541,7 +1546,8 @@ end
 request.headers['Some-Header'] = 'Some-Value'
 request.end
 </pre>
-<p>You can also use the <code>put_header</code> method to enable a more fluent API:    </p>
+<p>You can also use the <code>put_header</code> method to enable a more fluent API:  <br/>
+</p>
 <pre class="prettyprint">client = Vertx::HttpClient.new
 client.host = 'foo.com'
 
@@ -1652,7 +1658,8 @@ end
 request.send_head
 </pre>
 <h2 id="pumping-requests-and-responses">Pumping Requests and Responses</h2><br/>
-<p>The HTTP client and server requests and responses all implement either <code>ReadStream</code> or <code>WriteStream</code>. This means you can pump between them and any other read and write streams.    </p>
+<p>The HTTP client and server requests and responses all implement either <code>ReadStream</code> or <code>WriteStream</code>. This means you can pump between them and any other read and write streams.  <br/>
+</p>
 <h2 id="https-servers">HTTPS Servers</h2><br/>
 <p>HTTPS servers are very easy to write using vert.x.</p>
 <p>An HTTPS server has an identical API to a standard HTTP server. Getting the server to use HTTPS is just a matter of configuring the HTTP Server before <code>listen</code> is called.</p>
@@ -1735,7 +1742,8 @@ end
 server.request_handler(route_matcher).listen(8080, 'localhost')
 </pre>
 <p>Run the above and point your browser at <code>http://localhost:8080/animals/cats</code>.</p>
-<p>It will display 'first is animals and second is cats'.    </p>
+<p>It will display 'first is animals and second is cats'.  <br/>
+</p>
 <h2 id="handling-requests-where-nothing-matches">Handling requests where nothing matches</h2><br/>
 <p>You can use the <code>no_match</code> method to specify a handler that will be called if nothing matches. If you don't specify a no match handler and nothing matches, a 404 will be returned.</p>
 <pre class="prettyprint">route_matcher.no_match { |req| req.response.end('Nothing matched') }
@@ -1783,7 +1791,8 @@ server.websocket_handler do |websocket|
 end.listen(8080, 'localhost')
 </pre>
 <h3 id="headers-on-the-websocket">Headers on the websocket</h3><br/>
-<p>You can use the <code>headers</code> property to retrieve the headers passed in the Http Request from the client that caused the upgrade to websockets.        </p>
+<p>You can use the <code>headers</code> property to retrieve the headers passed in the Http Request from the client that caused the upgrade to websockets.      <br/>
+</p>
 <h2 id="websockets-on-the-http-client">WebSockets on the HTTP client</h2><br/>
 <p>To use WebSockets from the HTTP client, you create the HTTP client as normal, then call the <code>connect_websocket</code> function, passing in the URI that you wish to connect to at the server, and a handler.</p>
 <p>The handler will then get called if the WebSocket successfully connects. If the WebSocket does not connect - perhaps the server rejects it, then any exception handler on the HTTP client will be called.</p>
@@ -1902,7 +1911,8 @@ httpServer.listen(8080)
    };
 &lt;/script&gt;
 </pre>
-<p>As you can see the API is very similar to the WebSockets API.    </p>
+<p>As you can see the API is very similar to the WebSockets API.  <br/>
+</p>
 <h1 id="sockjs-eventbus-bridge">SockJS - EventBus Bridge</h1><br/>
 <h2 id="setting-up-the-bridge">Setting up the Bridge</h2><br/>
 <p>By connecting up SockJS and the vert.x event bus we create a distributed event bus which not only spans multiple vert.x instances on the server side, but can also include client side JavaScript running in browsers.</p>
@@ -2037,7 +2047,8 @@ server.listen(8080)
   'requires_auth` =&gt; true
 }
 </pre>
-<p>This tells the bridge that any messages to save orders in the <code>orders</code> collection, will only be passed if the user is successful authenticated (i.e. logged in ok) first.       </p>
+<p>This tells the bridge that any messages to save orders in the <code>orders</code> collection, will only be passed if the user is successful authenticated (i.e. logged in ok) first.     <br/>
+</p>
 <h1 id="file-system">File System</h1><br/>
 <p>Vert.x lets you manipulate files on the file system. File system operations are asynchronous and take a handler block as the last argument.</p>
 <p>This block will be called when the operation is complete, or an error has occurred.</p>
@@ -2181,7 +2192,8 @@ end
   end
 end
 </pre>
-<p>The filter is a regular expression.    </p>
+<p>The filter is a regular expression.  <br/>
+</p>
 <h2 id="read_file_as_buffer">read_file_as_buffer</h2><br/>
 <p>Read the entire contents of a file in one go. <em>Be careful if using this with large files since the entire file will be stored in memory at once</em>.</p>
 <p><code>read_file_as_bufer(file)</code>. Where <code>file</code> is the file name of the file to read.</p>
@@ -2220,7 +2232,7 @@ puts "File #{res ? 'exists' : 'does not exist'}" if !err
 end
 </pre>
 <h2 id="open">open</h2><br/>
-<p>Opens an asynchronous file for reading \ writing.</p>
+<p>Opens an asynchronous file for reading  writing.</p>
 <ul>
 <li><code>open(path, perms = nil, read = true, write = true, create_new = true, flush = false)</code></li>
 </ul>
@@ -2297,7 +2309,8 @@ end
     end
 end
 </pre>
-<p>If you attempt to read past the end of file, the read will not fail but it will simply read zero bytes.    </p>
+<p>If you attempt to read past the end of file, the read will not fail but it will simply read zero bytes.  <br/>
+</p>
 <h3 id="flushing-data-to-underlying-storage">Flushing data to underlying storage.</h3><br/>
 <p>If the AsyncFile was not opened with <code>flush = true</code>, then you can manually flush any writes from the OS cache by calling the <code>flush</code> method.</p>
 <h3 id="using-asyncfile-as-readstream-and-writestream">Using AsyncFile as <code>ReadStream</code> and <code>WriteStream</code></h3><br/>
@@ -2356,7 +2369,8 @@ client.lookup_4('vertx.io') do |err, result|
     end
 end
 </pre>
-<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.  </p>
+<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.<br/>
+</p>
 <h2 id="lookup_6">lookup_6</h2><br/>
 <p>Try to lookup the AAAA (ipv5) record for a given name. The first which is returned will be used, so it behaves the same way as you may be used from when using "nslookup" on your operation system.</p>
 <p>To lookup the A record for "vertx.io" you would typically use it like:</p>
@@ -2369,7 +2383,8 @@ client.lookup_6('vertx.io') do |err, result|
     end
 end
 </pre>
-<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.  </p>
+<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.<br/>
+</p>
 <h2 id="resolve_a">resolve_a</h2><br/>
 <p>Try to resolve all A (ipv4) records for a given name. This is quite similar to using "dig" on unix like operation systems.</p>
 <p>To lookup all the A records for "vertx.io" you would typically do:</p>
@@ -2384,7 +2399,8 @@ client.resolve_a('vertx.io') do |err, records|
     end
 end
 </pre>
-<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.  </p>
+<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.<br/>
+</p>
 <h2 id="resolve_aaaa">resolve_aaaa</h2><br/>
 <p>Try to resolve all AAAA (ipv6) records for a given name. This is quite similar to using "dig" on unix like operation systems.</p>
 <p>To lookup all the AAAAA records for "vertx.io" you would typically do:</p>
@@ -2399,7 +2415,8 @@ client.resolve_aaaa('vertx.io') do |err, records|
     end
 end
 </pre>
-<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.  </p>
+<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.<br/>
+</p>
 <h2 id="resolve_cname">resolve_cname</h2><br/>
 <p>Try to resolve all CNAME records for a given name. This is quite similar to using "dig" on unix like operation systems.</p>
 <p>To lookup all the CNAME records for "vertx.io" you would typically do:</p>

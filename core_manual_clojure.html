@@ -313,10 +313,8 @@
 <li><a href="#random-access-writes">Random access writes</a></li>
 <li><a href="#random-access-reads">Random access reads</a></li>
 <li><a href="#flushing-data-to-underlying-storage">Flushing data to underlying storage.</a></li>
-<li><a href="#using-asyncfile-as-readstream-and-writestream">Using AsyncFile as ReadStream and WriteStream</a></li>
+<li><a href="#using-asyncfile-as-readstream-and-writestream">Using AsyncFile as <code>ReadStream</code> and <code>WriteStream</code></a></li>
 <li><a href="#closing-an-asyncfile">Closing an AsyncFile</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a href="#dns-client">DNS Client</a><ul>
@@ -327,6 +325,8 @@
 </ul>
 </li>
 <li><a href="#using-nrepl">Using nREPL</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <h1 id="writing-verticles">Writing Verticles</h1><br/>
@@ -2548,7 +2548,8 @@ above instead of pattern strings.</p>
 </pre>
 <p>Run the above and point your browser at
 <code>http://localhost:8080/animals/cats</code>.</p>
-<p>It will display 'first is animals and second is cats'.    </p>
+<p>It will display 'first is animals and second is cats'.  <br/>
+</p>
 <h2 id="handling-requests-where-nothing-matches">Handling requests where nothing matches</h2><br/>
 <p>You can use the <code>no-match</code> function to specify a handler that will be
 called if nothing matches. If you don't specify a no match handler and
@@ -2788,7 +2789,8 @@ SockJS website. A simple example:</p>
    };
 &lt;/script&gt;
 </pre>
-<p>As you can see the API is very similar to the WebSockets API.    </p>
+<p>As you can see the API is very similar to the WebSockets API.  <br/>
+</p>
 <h1 id="sockjs-eventbus-bridge">SockJS - EventBus Bridge</h1><br/>
 <h2 id="setting-up-the-bridge">Setting up the Bridge</h2><br/>
 <p>By connecting up SockJS and the vert.x event bus we create a
@@ -3227,7 +3229,7 @@ the file contents.</p>
 <li><code>:usable-space</code>. Usable space on the file system in bytes.</li>
 </ul>
 <h2 id="open">open</h2><br/>
-<p>Opens an asynchronous file for reading \ writing.</p>
+<p>Opens an asynchronous file for reading  writing.</p>
 <p>(open file handler &amp; kwargs)`</p>
 <p>Where <code>file</code> is the file to be opened. <code>handler</code> is called with the error
 (<code>nil</code> if successful), along with an AsyncFile object.</p>

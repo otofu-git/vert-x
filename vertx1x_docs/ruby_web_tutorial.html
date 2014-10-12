@@ -107,7 +107,8 @@ echo "&lt;html&gt;&lt;body&gt;Hello World&lt;/body&gt;&lt;/html&gt;" &gt; web/in
 <p>And run the web server:</p>
 <pre class="prettyprint">vertx run app.rb
 </pre>
-<p>Point your browser at <code>http://localhost:8080</code>. You should see a page returned with 'Hello World'.    </p>
+<p>Point your browser at <code>http://localhost:8080</code>. You should see a page returned with 'Hello World'.  <br/>
+</p>
 <p>That's the web server done.</p>
 <h2 id="step-3-serve-the-client-side-app">Step 3. Serve the client-side app</h2><br/>
 <p>Now we have a working web server, we need to serve the actual client side app.</p>
@@ -121,7 +122,8 @@ echo "&lt;html&gt;&lt;body&gt;Hello World&lt;/body&gt;&lt;/html&gt;" &gt; web/in
 <p><img alt="Client Application" src="tutorial_1.png"/></p>
 <p>Take some time to click around the app. It's pretty self explanatory.</p>
 <p>In the centre there's a set of tabs which let you flick between the shop, and your cart.</p>
-<p>On the left hand bar there's a form which allows you to login.    </p>
+<p>On the left hand bar there's a form which allows you to login.  <br/>
+</p>
 <h3 id="step-4-get-the-persistor-up-and-running">Step 4. Get the Persistor up and running</h3><br/>
 <p>The Vert.x module repository contains a module called <code>vertx.mongo-persistor</code>. </p>
 <p>This module allows you to store/update/delete/find data in a MongoDB database. (For detailed info on modules please see the modules manual).</p>
@@ -199,7 +201,8 @@ end
 </pre>
 <p>Refresh your browser.</p>
 <p>You should now see the catalogue displayed in the client side app:</p>
-<p><img alt="Client Application" src="tutorial_2.png"/>  </p>
+<p><img alt="Client Application" src="tutorial_2.png"/><br/>
+</p>
 <p>Now there is some stuff to buy, you should be able to add stuff to your cart, and view the contents of your cart by clicking on the cart tab.</p>
 <h2 id="step-7-requesting-data-from-the-server">Step 7. Requesting data from the server</h2><br/>
 <p>As previously mentioned, this isn't a tutorial on how to write a knockout.js client-side application, but let's take a quick look at the code in the client side app that requests the catalogue data and populates the shop.</p>
@@ -227,7 +230,8 @@ end
       });
   };
 </pre>
-<p>The <code>onopen</code> is called when, unsurprisingly, the event bus connection is fully setup and open.  </p>
+<p>The <code>onopen</code> is called when, unsurprisingly, the event bus connection is fully setup and open.<br/>
+</p>
 <p>At that point we are calling the <code>send</code> function on the event bus to a send a JSON message to the address <code>vertx.mongopersistor</code>. This is the address of the MongoDB persistor module that we configured earlier.</p>
 <p>The JSON message that we're sending specifies that we want to find and return all albums in the database. (For a full description of the operations that the MongoDBPersistor module expects you can consult the README.md in the <code>mod-mongo-persistor</code> repository).</p>
 <p>The final argument that we pass to to <code>send</code> is a reply handler. This is a function that gets called when the persistor has processed the operation and sent the reply back here. The first argument to the reply handler is the reply itself.</p>
@@ -359,7 +363,8 @@ see the manual).</p>
   'bridge' =&gt; true,
   ...
 </pre>
-<p>You'll also need to provide a key store. The keystore is just a Java keystore which contains the certificate for the server. It can be manipulated using the Java <code>keytool</code> command.        </p>
+<p>You'll also need to provide a key store. The keystore is just a Java keystore which contains the certificate for the server. It can be manipulated using the Java <code>keytool</code> command.      <br/>
+</p>
 <p>Copy the keystore from the distribution</p>
 <pre class="prettyprint">cp $VERTX_HOME/examples/ruby/webapp/server-keystore.jks .
 </pre>
@@ -396,7 +401,8 @@ end
 </pre>
 <h3 id="packaging-up-your-code-as-a-module">Packaging up your code as a Module</h3><br/>
 <p>You can package up your entire application, or just individual Verticles as modules, so they can be easily reused by other applications, or started on the command line more easily.</p>
-<p>For an explanation of how to do this, please see the modules manual.   </p></div>
+<p>For an explanation of how to do this, please see the modules manual. <br/>
+</p></div>
       </div>
     </div>
   </div>

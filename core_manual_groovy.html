@@ -79,8 +79,8 @@
 <li><a href="#compiled-groovy-verticles">Compiled Groovy verticles</a></li>
 <li><a href="#asynchronous-start">Asynchronous start</a></li>
 <li><a href="#verticle-clean-up">Verticle clean-up</a></li>
-<li><a href="#the-container-object">The container object</a></li>
-<li><a href="#the-vertx-object">The vertx object</a></li>
+<li><a href="#the-container-object">The <code>container</code> object</a></li>
+<li><a href="#the-vertx-object">The <code>vertx</code> object</a></li>
 <li><a href="#getting-configuration-in-a-verticle">Getting Configuration in a Verticle</a></li>
 <li><a href="#logging-from-a-verticle">Logging from a Verticle</a></li>
 <li><a href="#accessing-environment-variables-from-a-verticle">Accessing environment variables from a Verticle</a></li>
@@ -296,10 +296,8 @@
 <li><a href="#random-access-writes">Random access writes</a></li>
 <li><a href="#random-access-reads">Random access reads</a></li>
 <li><a href="#flushing-data-to-underlying-storage">Flushing data to underlying storage.</a></li>
-<li><a href="#using-asyncfile-as-readstream-and-writestream">Using AsyncFile as ReadStream and WriteStream</a></li>
+<li><a href="#using-asyncfile-as-readstream-and-writestream">Using AsyncFile as <code>ReadStream</code> and <code>WriteStream</code></a></li>
 <li><a href="#closing-an-asyncfile">Closing an AsyncFile</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a href="#dns-client">DNS Client</a><ul>
@@ -330,6 +328,8 @@
 <li><a href="#badsig">BADSIG</a></li>
 <li><a href="#badkey">BADKEY</a></li>
 <li><a href="#badtime">BADTIME</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -574,7 +574,8 @@ container.deployWorkerVerticle("verticle5.js", appConfig["verticle5_conf"], 10)
 eb.registerHandler("test.address") { message -&gt; println "I received a message ${message.body}" }
 </pre>
 <p>It's as simple as that. The handler will then receive any messages sent to that address.</p>
-<p>The return value of <code>registerHandler</code> is the Event Bus itself, i.e. we provide a <em>fluent</em> API so you can chain multiple calls together.   </p>
+<p>The return value of <code>registerHandler</code> is the Event Bus itself, i.e. we provide a <em>fluent</em> API so you can chain multiple calls together. <br/>
+</p>
 <p>When you register a handler on an address and you're in a cluster it can take some time for the knowledge of that new handler to be propagated across the entire cluster. If you want to be notified when that has completed you can optionally specify another handler to the <code>registerHandler</code> method as the third argument. This handler will then be called once the information has reached all nodes of the cluster. E.g. :</p>
 <pre class="prettyprint">def myHandler = { message -&gt; println "I received a message ${message.body}" }
 
@@ -651,7 +652,8 @@ eb.send("test.address", 3.14159)
 <h2 id="distributed-event-bus">Distributed event bus</h2><br/>
 <p>To make each Vert.x instance on your network participate on the same event bus, start each Vert.x instance with the <code>-cluster</code> command line switch.</p>
 <p>See the chapter in the main manual on <a href=""><em>running Vert.x</em></a> for more information on this. </p>
-<p>Once you've done that, any Vert.x instances started in cluster mode will merge to form a distributed event bus.   </p>
+<p>Once you've done that, any Vert.x instances started in cluster mode will merge to form a distributed event bus. <br/>
+</p>
 <h1 id="shared-data">Shared Data</h1><br/>
 <p>Sometimes it makes sense to allow different verticles instances to share data in a safe way. Vert.x allows simple <code>java.util.concurrent.ConcurrentMap</code> and <code>java.util.Set</code> data structures to be shared between verticles.</p>
 <p>There is a caveat: To prevent issues due to mutable data, vert.x only allows simple immutable types such as number, boolean and string or Buffer to be used in shared data. With a Buffer, it is automatically copied when retrieved from the shared data, so different verticle instances never see the same object instance.</p>
@@ -751,7 +753,8 @@ for (i in 0 ..&lt; buff.length) {
 <li><code>length()</code>: To obtain the length of the buffer. The length of a buffer is the index of the byte in the buffer with the largest index + 1.</li>
 <li><code>copy()</code>: Copy the entire buffer</li>
 </ul>
-<p>See the GroovyDoc for more detailed method level documentation.   </p>
+<p>See the GroovyDoc for more detailed method level documentation. <br/>
+</p>
 <h1 id="delayed-and-periodic-tasks">Delayed and Periodic Tasks</h1><br/>
 <p>It's very common in Vert.x to want to perform an action after a delay, or periodically.</p>
 <p>In standard verticles you can't just make the thread sleep to introduce a delay, as that will block the event loop thread.</p>
@@ -795,7 +798,8 @@ long timerID = vertx.setPeriodic(1000) { timerID -&gt;
 <pre class="prettyprint">def server = vertx.createNetServer()
 </pre>
 <h3 id="start-the-server-listening">Start the Server Listening</h3><br/>
-<p>To tell that server to listen for connections we do:    </p>
+<p>To tell that server to listen for connections we do:  <br/>
+</p>
 <pre class="prettyprint">def server = vertx.createNetServer()
 
 server.listen(1234, "myhost")
@@ -815,7 +819,8 @@ server.connectHandler { sock -&gt; println "A client has connected!" }
 
 server.listen(1234, "localhost")
 </pre>
-<p>That's a bit more interesting. Now it displays 'A client has connected!' every time a client connects.   </p>
+<p>That's a bit more interesting. Now it displays 'A client has connected!' every time a client connects. <br/>
+</p>
 <p>The return value of the <code>connectHandler</code> method is the server itself, so multiple invocations can be chained together. That means we can rewrite the above as:</p>
 <pre class="prettyprint">def server = vertx.createNetServer()
 
@@ -824,7 +829,8 @@ server.connectHandler { sock -&gt; println "A client has connected!" }.listen(12
 <p>or just</p>
 <pre class="prettyprint">vertx.createNetServer().connectHandler { sock -&gt; println "A client has connected!" }.listen(1234, "localhost")
 </pre>
-<p>This is a common pattern throughout the Vert.x API.  </p>
+<p>This is a common pattern throughout the Vert.x API.<br/>
+</p>
 <h3 id="closing-a-net-server">Closing a Net Server</h3><br/>
 <p>To close a net server just call the <code>close</code> function.</p>
 <pre class="prettyprint">server.close()
@@ -835,7 +841,8 @@ server.connectHandler { sock -&gt; println "A client has connected!" }.listen(12
    println "close succeeded? ${asyncResult.succeeded}"
 }
 </pre>
-<p>If you want your net server to last the entire lifetime of your verticle, you don't need to call <code>close</code> explicitly, the Vert.x container will automatically close any servers that you created when the verticle is undeployed.    </p>
+<p>If you want your net server to last the entire lifetime of your verticle, you don't need to call <code>close</code> explicitly, the Vert.x container will automatically close any servers that you created when the verticle is undeployed.  <br/>
+</p>
 <h3 id="netserver-properties">NetServer Properties</h3><br/>
 <p>NetServer has a set of properties you can set which affect its behaviour. Firstly there are bunch of properties used to tweak the TCP parameters, in most cases you won't need to set these:</p>
 <ul>
@@ -1215,8 +1222,10 @@ server.requestHandler { request -&gt;
 }.listen(8080, "localhost")
 </pre>
 <h4 id="request-params">Request params</h4><br/>
-<p>Similarly to the headers, the request parameters are available using the <code>params</code> property on the request object.   </p>
-<p>The returned object is an instance of <code>org.vertx.groovy.core.MultiMap</code>.   </p>
+<p>Similarly to the headers, the request parameters are available using the <code>params</code> property on the request object. <br/>
+</p>
+<p>The returned object is an instance of <code>org.vertx.groovy.core.MultiMap</code>. <br/>
+</p>
 <p>Request parameters are sent on the request URI, after the path. For example if the URI was:</p>
 <pre class="prettyprint">/page.html?param1=abc&amp;param2=xyz
 </pre>
@@ -1365,8 +1374,10 @@ request.response.headers.set("Hat colour", "Mauve")
 <p>You put the HTTP response into chunked mode as follows:</p>
 <pre class="prettyprint">req.response.chunked = true
 </pre>
-<p>Default is non-chunked. When in chunked mode, each call to <code>response.write(...)</code> will result in a new HTTP chunk being written out.  </p>
-<p>When in chunked mode you can also write HTTP response trailers to the response. These are actually written in the final chunk of the response.  </p>
+<p>Default is non-chunked. When in chunked mode, each call to <code>response.write(...)</code> will result in a new HTTP chunk being written out.<br/>
+</p>
+<p>When in chunked mode you can also write HTTP response trailers to the response. These are actually written in the final chunk of the response.<br/>
+</p>
 <p>To add trailers to the response, add them to the <code>trailers</code> multimap</p>
 <pre class="prettyprint">request.response.trailers.set("Philosophy", "Solipsism")
 request.response.trailers.set("Favourite-Shakin-Stevens-Song", "Behind the Green Door")
@@ -1724,7 +1735,8 @@ server.websocketHandler{ ws -&gt;
 }.listen(8080, "localhost")
 </pre>
 <h3 id="headers-on-the-websocket">Headers on the websocket</h3><br/>
-<p>You can use the <code>headers</code> property to retrieve the headers passed in the Http Request from the client that caused the upgrade to websockets.    </p>
+<p>You can use the <code>headers</code> property to retrieve the headers passed in the Http Request from the client that caused the upgrade to websockets.  <br/>
+</p>
 <h2 id="websockets-on-the-http-client">WebSockets on the HTTP client</h2><br/>
 <p>To use WebSockets from the HTTP client, you create the HTTP client as normal, then call the <code>connectWebsocket</code> method, passing in the URI that you wish to connect to at the server, and a handler.</p>
 <p>The handler will then get called if the WebSocket successfully connects. If the WebSocket does not connect - perhaps the server rejects it - then any exception handler on the HTTP client will be called.</p>
@@ -1775,7 +1787,8 @@ client.connectWebsocket("/some-uri") { ws -&gt;
 def sockJSServer = vertx.createSockJSServer(httpServer)
 </pre>
 <p>Each SockJS server can host multiple <em>applications</em>.</p>
-<p>Each application is defined by some configuration, and provides a handler which gets called when incoming SockJS connections arrive at the server.      </p>
+<p>Each application is defined by some configuration, and provides a handler which gets called when incoming SockJS connections arrive at the server.    <br/>
+</p>
 <p>For example, to create a SockJS echo application:</p>
 <pre class="prettyprint">def httpServer = vertx.createHttpServer()
 
@@ -1795,7 +1808,8 @@ httpServer.listen(8080)
 <li><code>insert_JSESSIONID</code>: Some hosting providers enable sticky sessions only to requests that have JSESSIONID cookie set. This setting controls if the server should set this cookie to a dummy value. By default setting JSESSIONID cookie is enabled. More sophisticated beaviour can be achieved by supplying a function.</li>
 <li><code>session_timeout</code>: The server sends a <code>close</code> event when a client receiving connection have not been seen for a while. This delay is configured by this setting. By default the <code>close</code> event will be emitted when a receiving connection wasn't seen for 5 seconds.</li>
 <li><code>heartbeat_period</code>: In order to keep proxies and load balancers from closing long running http requests we need to pretend that the connecion is active and send a heartbeat packet once in a while. This setting controlls how often this is done. By default a heartbeat packet is sent every 5 seconds.</li>
-<li><code>max_bytes_streaming</code>: Most streaming transports save responses on the client side and don't free memory used by delivered messages. Such transports need to be garbage-collected once in a while. <code>max_bytes_streaming</code> sets a minimum number of bytes that can be send over a single http streaming request before it will be closed. After that client needs to open new request. Setting this value to one effectively disables streaming and will make streaming transports to behave like polling transports. The default value is 128K.    </li>
+<li><code>max_bytes_streaming</code>: Most streaming transports save responses on the client side and don't free memory used by delivered messages. Such transports need to be garbage-collected once in a while. <code>max_bytes_streaming</code> sets a minimum number of bytes that can be send over a single http streaming request before it will be closed. After that client needs to open new request. Setting this value to one effectively disables streaming and will make streaming transports to behave like polling transports. The default value is 128K.  <br/>
+</li>
 <li><code>library_url</code>: Transports which don't support cross-domain communication natively ('eventsource' to name one) use an iframe trick. A simple page is served from the SockJS server (using its foreign domain) and is placed in an invisible iframe. Code run from this iframe doesn't need to worry about cross-domain issues, as it's being run from domain local to the SockJS server. This iframe also does need to load SockJS javascript client library, and this option lets you specify its url (if you're unsure, point it to the latest minified SockJS client release, this is the default). The default value is <code>http://cdn.sockjs.org/sockjs-0.3.4.min.js</code></li>
 </ul>
 <h2 id="reading-and-writing-data-from-a-sockjs-server">Reading and writing data from a SockJS server</h2><br/>
@@ -1819,7 +1833,8 @@ httpServer.listen(8080)
    };
 &lt;/script&gt;
 </pre>
-<p>As you can see the API is very similar to the WebSockets API.    </p>
+<p>As you can see the API is very similar to the WebSockets API.  <br/>
+</p>
 <h1 id="sockjs-eventbus-bridge">SockJS - EventBus Bridge</h1><br/>
 <h2 id="setting-up-the-bridge">Setting up the Bridge</h2><br/>
 <p>By connecting up SockJS and the Vert.x event bus we create a distributed event bus which not only spans multiple Vert.x instances on the server side, but can also include client side JavaScript running in browsers.</p>
@@ -1868,7 +1883,8 @@ server.listen(8080)
 </pre>
 <p>The parameter to the constructor is the URI where to connect to the event bus. Since we create our bridge with the prefix <code>eventbus</code> we will connect there.</p>
 <p>You can't actually do anything with the bridge until it is opened. When it is open the <code>onopen</code> handler will be called.</p>
-<p>The client side event bus API for registering and unregistering handlers and for sending messages is the same as the server side one. Please consult the chapter on the event bus for full information.    </p>
+<p>The client side event bus API for registering and unregistering handlers and for sending messages is the same as the server side one. Please consult the chapter on the event bus for full information.  <br/>
+</p>
 <p><strong>There is one more thing to do before getting this working, please read the following section....</strong></p>
 <h2 id="securing-the-bridge">Securing the Bridge</h2><br/>
 <p>If you started a bridge like in the above example without securing it, and attempted to send messages through it you'd find that the messages mysteriously disappeared. What happened to them?</p>
@@ -1951,7 +1967,8 @@ vertx.createSockJSBridge(server).bridge(config, [[:]], [[:]])
   requires_auth: true
 }
 </pre>
-<p>This tells the bridge that any messages to save orders in the <code>orders</code> collection, will only be passed if the user is successful authenticated (i.e. logged in ok) first.    </p>
+<p>This tells the bridge that any messages to save orders in the <code>orders</code> collection, will only be passed if the user is successful authenticated (i.e. logged in ok) first.  <br/>
+</p>
 <h1 id="file-system">File System</h1><br/>
 <p>Vert.x lets you manipulate files on the file system. File system operations are asynchronous and take a handler function as the last argument. This function will be called when the operation is complete, or an error has occurred.</p>
 <p>The argument passed into the handler is an instance of <code>org.vertx.groovy.core.AsyncResult</code>.</p>
@@ -2159,7 +2176,7 @@ r--r--r--
 }
 </pre>
 <h2 id="open">open</h2><br/>
-<p>Opens an asynchronous file for reading \ writing.</p>
+<p>Opens an asynchronous file for reading  writing.</p>
 <p>This method can be called in four different ways:</p>
 <ul>
 <li><code>open(file, handler)</code></li>
@@ -2314,7 +2331,8 @@ client.lookup4("vertx.io") { ar -&gt;
     }    
 }
 </pre>
-<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.  </p>
+<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.<br/>
+</p>
 <h2 id="lookup6">lookup6</h2><br/>
 <p>Try to lookup the AAAA (ipv5) record for a given name. The first which is returned will be used, so it behaves the same way as you may be used from when using "nslookup" on your operation system.</p>
 <p>To lookup the A record for "vertx.io" you would typically use it like:</p>
@@ -2327,7 +2345,8 @@ client.lookup6("vertx.io") { ar -&gt;
     }    
 }
 </pre>
-<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.  </p>
+<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.<br/>
+</p>
 <h2 id="resolvea">resolveA</h2><br/>
 <p>Try to resolve all A (ipv4) records for a given name. This is quite similar to using "dig" on unix like operation systems.</p>
 <p>To lookup all the A records for "vertx.io" you would typically do:</p>
@@ -2343,7 +2362,8 @@ client.resolveA("vertx.io") { ar -&gt;
     }    
 }
 </pre>
-<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.  </p>
+<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.<br/>
+</p>
 <h2 id="resolveaaaa">resolveAAAA</h2><br/>
 <p>Try to resolve all AAAA (ipv6) records for a given name. This is quite similar to using "dig" on unix like operation systems.</p>
 <p>To lookup all the AAAAA records for "vertx.io" you would typically do:</p>
@@ -2359,7 +2379,8 @@ client.resolveAAAA("vertx.io") { ar -&gt;
     }    
 })
 </pre>
-<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.  </p>
+<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.<br/>
+</p>
 <h2 id="resolvecname">resolveCNAME</h2><br/>
 <p>Try to resolve all CNAME records for a given name. This is quite similar to using "dig" on unix like operation systems.</p>
 <p>To lookup all the CNAME records for "vertx.io" you would typically do:</p>

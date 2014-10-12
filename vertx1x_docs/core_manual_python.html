@@ -208,8 +208,6 @@
 <li><a href="#reading-data-from-the-response-body">Reading Data from the Response Body</a></li>
 </ul>
 </li>
-</ul>
-</li>
 <li><a href="#pumping-requests-and-responses">Pumping Requests and Responses</a><ul>
 <li><a href="#100-continue-handling">100-Continue Handling</a></li>
 </ul>
@@ -275,8 +273,10 @@
 <li><a href="#random-access-writes">Random access writes</a></li>
 <li><a href="#random-access-reads">Random access reads</a></li>
 <li><a href="#flushing-data-to-underlying-storage">Flushing data to underlying storage.</a></li>
-<li><a href="#using-asyncfile-as-readstream-and-writestream">Using AsyncFile as ReadStream and WriteStream</a></li>
+<li><a href="#using-asyncfile-as-readstream-and-writestream">Using AsyncFile as <code>ReadStream</code> and <code>WriteStream</code></a></li>
 <li><a href="#closing-an-asyncfile">Closing an AsyncFile</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -468,7 +468,8 @@ EventBus.register_handler('test.address', myHandler)
 <pre class="prettyprint">EventBus.unregister_handler('test.address', id);
 </pre>
 <p>As with registering, when you unregister a handler and you're in a cluster it can also take some time for the knowledge of that unregistration to be propagated across the entire to cluster.
-If you want your handler to live for the full lifetime of your verticle there is no need to unregister it explicitly - vert.x will automatically unregister any handlers when the verticle is stopped.  </p>
+If you want your handler to live for the full lifetime of your verticle there is no need to unregister it explicitly - vert.x will automatically unregister any handlers when the verticle is stopped.<br/>
+</p>
 <h3 id="sending-messages_1">Sending messages</h3><br/>
 <p>Sending a message is also trivially easy. Just send it specifying the address you want to send it to, for example:</p>
 <pre class="prettyprint">from core.event_bus import EventBus
@@ -685,7 +686,8 @@ str = buff.get_string(100, 110, 'UTF-16') # Get 10 bytes from pos 100 interprete
 <li><code>length</code>: To obtain the length of the buffer. The length of a buffer is the index of the byte in the buffer with the largest index + 1.</li>
 <li><code>copy</code>: Copy the entire buffer</li>
 </ul>
-<p>See the Yardoc for more detailed method level documentation.    </p>
+<p>See the Yardoc for more detailed method level documentation.  <br/>
+</p>
 <h1 id="delayed-and-periodic-tasks">Delayed and Periodic Tasks</h1><br/>
 <p>It's very common in vert.x to want to perform an action after a delay, or periodically.</p>
 <p>In standard verticles you can't just make the thread sleep to introduce a delay, as that will block the event loop thread.</p>
@@ -793,7 +795,8 @@ server.listen(1234, 'localhost')
 
 server.close(close_handler)
 </pre>
-<p>In most cases you don't need to close a net server explicitly since vert.x will close them for you when the verticle stops.    </p>
+<p>In most cases you don't need to close a net server explicitly since vert.x will close them for you when the verticle stops.  <br/>
+</p>
 <h3 id="netserver-properties">NetServer Properties</h3><br/>
 <p>NetServer has a set of attributes you can set which affect its behaviour. Firstly there are bunch of attributes used to tweak the TCP parameters, in most cases you won't need to set these:</p>
 <ul>
@@ -1297,7 +1300,8 @@ def request_handler(request):
 
 server.listen(8080, 'localhost')
 </pre>
-<p>The default value for <code>status_code</code> is <code>200</code>.    </p>
+<p>The default value for <code>status_code</code> is <code>200</code>.  <br/>
+</p>
 <h4 id="writing-http-responses">Writing HTTP responses</h4><br/>
 <p>To write data to an HTTP response, you invoke the <code>write_buffer</code> or <code>write_str</code> methods. These methods can be invoked multiple times before the response is ended.</p>
 <p>With a single buffer:</p>
@@ -1504,7 +1508,8 @@ request = client.post('/some-path', response_handler)
 request.headers['Some-Header'] = 'Some-Value'
 request.end()
 </pre>
-<p>You can also use the <code>put_header</code> method to enable a more fluent API:    </p>
+<p>You can also use the <code>put_header</code> method to enable a more fluent API:  <br/>
+</p>
 <pre class="prettyprint">client = vertx.create_http_client()
 client.host = 'foo.com'
 
@@ -1694,7 +1699,8 @@ route_matcher.all_re("\/([^\/]+)\/([^\/]+)", matched)
 server.request_handler(route_matcher).listen(8080, 'localhost')
 </pre>
 <p>Run the above and point your browser at <code>http://localhost:8080/animals/cats</code>.</p>
-<p>It will display 'first is animals and second is cats'.    </p>
+<p>It will display 'first is animals and second is cats'.  <br/>
+</p>
 <h2 id="handling-requests-where-nothing-matches">Handling requests where nothing matches</h2><br/>
 <p>You can use the <code>no_match</code> method to specify a handler that will be called if nothing matches. If you don't specify a no match handler and nothing matches, a 404 will be returned.</p>
 <pre class="prettyprint">@route_matcher.no_match 
@@ -1870,7 +1876,8 @@ httpServer.listen(8080)
    };
 &lt;/script&gt;
 </pre>
-<p>As you can see the API is very similar to the WebSockets API.    </p>
+<p>As you can see the API is very similar to the WebSockets API.  <br/>
+</p>
 <h1 id="sockjs-eventbus-bridge">SockJS - EventBus Bridge</h1><br/>
 <h2 id="setting-up-the-bridge">Setting up the Bridge</h2><br/>
 <p>By connecting up SockJS and the vert.x event bus we create a distributed event bus which not only spans multiple vert.x instances on the server side, but can also include client side JavaScript running in browsers.</p>
@@ -1996,7 +2003,8 @@ server.listen(8080)
   'requires_auth` : true
 }
 </pre>
-<p>This tells the bridge that any messages to save orders in the <code>orders</code> collection, will only be passed if the user is successful authenticated (i.e. logged in ok) first.    </p>
+<p>This tells the bridge that any messages to save orders in the <code>orders</code> collection, will only be passed if the user is successful authenticated (i.e. logged in ok) first.  <br/>
+</p>
 <p>When a message is sent from the client that requires authorisation, the client must pass a field <code>sessionID</code> with the message that contains the unique session ID that they obtained when they logged in with the <code>auth-mgr</code>.</p>
 <p>When the bridge receives such a message, it will send a message to the <code>auth-mgr</code> to see if the session is authorised for that message. If the session is authorised the bridge will cache the authorisation for a certain amount of time (five minutes by default)</p>
 <h1 id="file-system">File System</h1><br/>
@@ -2143,7 +2151,8 @@ FileSystem.mkdir('a/b/c', True, handler=handler)
             print filename
 FileSystem.read_dir('mydirectory', '.*\.txt', handler)
 </pre>
-<p>The filter is a regular expression.    </p>
+<p>The filter is a regular expression.  <br/>
+</p>
 <h2 id="read_file_as_buffer">read_file_as_buffer</h2><br/>
 <p>Read the entire contents of a file in one go. <em>Be careful if using this with large files since the entire file will be stored in memory at once</em>.</p>
 <p><code>read_file_as_bufer(file)</code>. Where <code>file</code> is the file name of the file to read.</p>
@@ -2184,7 +2193,7 @@ FileSystem.exists('some-file.txt', handler)
 FileSystem.fs_props('mydir', handler)
 </pre>
 <h2 id="open">open</h2><br/>
-<p>Opens an asynchronous file for reading \ writing.</p>
+<p>Opens an asynchronous file for reading  writing.</p>
 <ul>
 <li><code>open(path, perms = None, read = True, write = True, create_new = True, flush = False)</code></li>
 </ul>

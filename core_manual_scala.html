@@ -78,8 +78,8 @@
 <li><a href="#writing-verticles">Writing Verticles</a><ul>
 <li><a href="#asynchronous-start">Asynchronous start</a></li>
 <li><a href="#verticle-clean-up">Verticle clean-up</a></li>
-<li><a href="#the-container-object">The container object</a></li>
-<li><a href="#the-vertx-object">The vertx object</a></li>
+<li><a href="#the-container-object">The <code>container</code> object</a></li>
+<li><a href="#the-vertx-object">The <code>vertx</code> object</a></li>
 <li><a href="#getting-configuration-in-a-verticle">Getting Configuration in a Verticle</a></li>
 <li><a href="#logging-from-a-verticle">Logging from a Verticle</a></li>
 <li><a href="#accessing-environment-variables-from-a-verticle">Accessing environment variables from a Verticle</a></li>
@@ -303,10 +303,8 @@
 <li><a href="#random-access-writes">Random access writes</a></li>
 <li><a href="#random-access-reads">Random access reads</a></li>
 <li><a href="#flushing-data-to-underlying-storage">Flushing data to underlying storage.</a></li>
-<li><a href="#using-asyncfile-as-readstream-and-writestream">Using AsyncFile as ReadStream and WriteStream</a></li>
+<li><a href="#using-asyncfile-as-readstream-and-writestream">Using AsyncFile as <code>ReadStream</code> and <code>WriteStream</code></a></li>
 <li><a href="#closing-an-asyncfile">Closing an AsyncFile</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a href="#dns-client-work-in-progress-useable-in-lang-scala-version-030">DNS Client (Work in Progress, useable in lang-scala version 0.3.0)</a><ul>
@@ -342,6 +340,8 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 </div>
 <h1 id="writing-verticles">Writing Verticles</h1><br/>
 <p>As was described in the <a href="manual.html#verticle">main manual</a>, a verticle is the execution unit of Vert.x.</p>
@@ -366,7 +366,8 @@ vertx.createNetServer().connectHandler({ socket: NetSocket =&gt;
 </pre>
 <p>And notice how data you send (and hit enter) is echoed back to you. </p>
 <p>Congratulations! You've written your first verticle.</p>
-<p>Notice how you didn't have to first compile the <code>.scala</code> file to a <code>.class</code> file. Vert.x understands how to run <code>.scala</code> files directly - internally doing the compilation on the fly. (It also supports running .class files too if you prefer)          </p>
+<p>Notice how you didn't have to first compile the <code>.scala</code> file to a <code>.class</code> file. Vert.x understands how to run <code>.scala</code> files directly - internally doing the compilation on the fly. (It also supports running .class files too if you prefer)        <br/>
+</p>
 <p>Just as in Java, you can also write classes that extend Verticle like this:</p>
 <pre class="prettyprint">import org.vertx.scala.core.net.NetSocket
 import org.vertx.scala.core.streams.Pump
@@ -453,7 +454,8 @@ logger.info("I am logging something")
 <li>info</li>
 <li>warn</li>
 <li>error</li>
-<li>fatal           </li>
+<li>fatal         <br/>
+</li>
 </ul>
 <p>Which have the normal meanings you would expect.</p>
 <p>The log files by default go in a file called <code>vertx.log</code> in the system temp directory. On my Linux box this is <code>\tmp</code>.</p>
@@ -563,7 +565,8 @@ container.deployWorkerVerticle("verticle5.js", verticle5Config, 10)
 <p>A verticle instance is almost always single threaded (the only exception is multi-threaded worker verticles which are an advanced feature), this means a single instance can at most utilise one core of your server.</p>
 <p>In order to scale across cores you need to deploy more verticle instances. The exact numbers depend on your application - how many verticles there are and of what type.</p>
 <p>You can deploy more verticle instances programmatically or on the command line when deploying your module using the <code>-instances</code> command line option.</p>
-<p><a id="event-bus"> </a>   </p>
+<p><a id="event-bus"> </a> <br/>
+</p>
 <h1 id="the-event-bus">The Event Bus</h1><br/>
 <p>The event bus is the nervous system of Vert.x.</p>
 <p>It allows verticles to communicate with each other irrespective of what language they are written in, and whether they're in the same Vert.x instance, or in a different Vert.x instance.</p>
@@ -610,7 +613,8 @@ eb.registerHandler("test.address", myHandler)
   val body: String = message.body
 }
 </pre>
-<p>The return value of <code>registerHandler</code> is the Event Bus itself, i.e. we provide a <em>fluent</em> API so you can chain multiple calls together.   </p>
+<p>The return value of <code>registerHandler</code> is the Event Bus itself, i.e. we provide a <em>fluent</em> API so you can chain multiple calls together. <br/>
+</p>
 <p>When you register a handler on an address and you're in a cluster it can take some time for the knowledge of that new handler to be propagated across the entire cluster. If you want to be notified when that has completed you can optionally specify another handler to the <code>registerHandler</code> method as the third argument. This handler will then be called once the information has reached all nodes of the cluster. E.g. :</p>
 <pre class="prettyprint">eb.registerHandler("test.address", myHandler, { asyncResult: AsyncResult[Void] =&gt;
   println("The handler has been registered across the cluster ok? " + asyncResult.succeeded())
@@ -744,7 +748,8 @@ eb.send("test.address", obj)
 <h2 id="distributed-event-bus">Distributed event bus</h2><br/>
 <p>To make each Vert.x instance on your network participate on the same event bus, start each Vert.x instance with the <code>-cluster</code> command line switch.</p>
 <p>See the chapter in the main manual on <a href=""><em>running Vert.x</em></a> for more information on this. </p>
-<p>Once you've done that, any Vert.x instances started in cluster mode will merge to form a distributed event bus.   </p>
+<p>Once you've done that, any Vert.x instances started in cluster mode will merge to form a distributed event bus. <br/>
+</p>
 <h1 id="shared-data">Shared Data</h1><br/>
 <p>Sometimes it makes sense to allow different verticles instances to share data in a safe way. Vert.x allows simple <code>java.util.concurrent.ConcurrentMap</code> and <code>java.util.Set</code> data structures to be shared between verticles.</p>
 <p>There is a caveat: To prevent issues due to mutable data, Vert.x only allows simple immutable types such as number, boolean and string or Buffer to be used in shared data. With a Buffer, it is automatically copied when retrieved from the shared data, so different verticle instances never see the same object instance.</p>
@@ -833,7 +838,8 @@ for (i &lt;- 0 until buff.length() by 4) {
 <li><code>length()</code>. To obtain the length of the buffer. The length of a buffer is the index of the byte in the buffer with the largest index + 1.</li>
 <li><code>copy()</code>. Copy the entire buffer</li>
 </ul>
-<p>See the JavaDoc for more detailed method level documentation.    </p>
+<p>See the JavaDoc for more detailed method level documentation.  <br/>
+</p>
 <h1 id="json">JSON</h1><br/>
 <p>Whereas JavaScript has first class support for JSON, and Ruby has Hash literals which make representing JSON easy within code, things aren't so easy in Scala.</p>
 <p>For this reason, if you want to use JSON from within your Scala verticles, we provide some simple JSON classes which represent a JSON object and a JSON array. These classes provide methods for setting and getting all types supported in JSON on an object or array.</p>
@@ -852,7 +858,8 @@ def handle(message: Message[JsonObject]) = {
     println("age is " + message.body.getNumber("age"))
 }
 </pre>
-<p>Methods also existing for converting this objects to and from their JSON serialized forms.  </p>
+<p>Methods also existing for converting this objects to and from their JSON serialized forms.<br/>
+</p>
 <h1 id="delayed-and-periodic-tasks">Delayed and Periodic Tasks</h1><br/>
 <p>It's very common in Vert.x to want to perform an action after a delay, or periodically.</p>
 <p>In standard verticles you can't just make the thread sleep to introduce a delay, as that will block the event loop thread.</p>
@@ -901,7 +908,8 @@ val timerID = vertx.setPeriodic(1000, { timerID: Long =&gt;
 <pre class="prettyprint">val server = vertx.createNetServer()
 </pre>
 <h3 id="start-the-server-listening">Start the Server Listening</h3><br/>
-<p>To tell that server to listen for connections we do:    </p>
+<p>To tell that server to listen for connections we do:  <br/>
+</p>
 <pre class="prettyprint">vertx.createNetServer.listen(1234, "myhost")
 </pre>
 <p>The first parameter to <code>listen</code> is the port. A wildcard port of <code>0</code> can be specified which means a random available port will be chosen to actually listen at. Once the server has completed listening you can then call the <code>port()</code> method of the server to find out the real port it is using.</p>
@@ -919,7 +927,8 @@ val timerID = vertx.setPeriodic(1000, { timerID: Long =&gt;
 
 server.listen(1234, "localhost")
 </pre>
-<p>That's a bit more interesting. Now it displays 'A client has connected!' every time a client connects.   </p>
+<p>That's a bit more interesting. Now it displays 'A client has connected!' every time a client connects. <br/>
+</p>
 <p>The return value of the <code>connectHandler</code> method is the server itself, so multiple invocations can be chained together. That means we can rewrite the above as:</p>
 <pre class="prettyprint">val server = vertx.createNetServer()
 
@@ -932,7 +941,8 @@ server.connectHandler({ sock: NetSocket =&gt;
     logger.info("A client has connected!")
 }).listen(1234, "localhost")
 </pre>
-<p>This is a common pattern throughout the Vert.x API.  </p>
+<p>This is a common pattern throughout the Vert.x API.<br/>
+</p>
 <h3 id="closing-a-net-server">Closing a Net Server</h3><br/>
 <p>To close a net server just call the <code>close</code> function.</p>
 <pre class="prettyprint">server.close()
@@ -943,7 +953,8 @@ server.connectHandler({ sock: NetSocket =&gt;
     log.info("Close succeeded? " + asyncResult.succeeded())
 })
 </pre>
-<p>If you want your net server to last the entire lifetime of your verticle, you don't need to call <code>close</code> explicitly, the Vert.x container will automatically close any servers that you created when the verticle is undeployed.    </p>
+<p>If you want your net server to last the entire lifetime of your verticle, you don't need to call <code>close</code> explicitly, the Vert.x container will automatically close any servers that you created when the verticle is undeployed.  <br/>
+</p>
 <h3 id="netserver-properties">NetServer Properties</h3><br/>
 <p>NetServer has a set of properties you can set which affect its behaviour. Firstly there are bunch of properties used to tweak the TCP parameters, in most cases you won't need to set these:</p>
 <ul>
@@ -990,7 +1001,8 @@ sock.write(myBuffer)
 <p>A string. In this case the string will encoded using UTF-8 and the result written to the wire.</p>
 <pre class="prettyprint">sock.write("hello")
 </pre>
-<p>A string and an encoding. In this case the string will encoded using the specified encoding and the result written to the wire.     </p>
+<p>A string and an encoding. In this case the string will encoded using the specified encoding and the result written to the wire.   <br/>
+</p>
 <pre class="prettyprint">sock.write("hello", "UTF-16")
 </pre>
 <p>The <code>write</code> function is asynchronous and always returns immediately after the write has been queued.</p>
@@ -1256,7 +1268,8 @@ client.setReconnectInterval(500)
 
 server.listen(8080, "localhost")
 </pre>
-<p>Every time a request arrives on the server the handler is called passing in an instance of <code>org.vertx.scala.core.http.HttpServerRequest</code>.    </p>
+<p>Every time a request arrives on the server the handler is called passing in an instance of <code>org.vertx.scala.core.http.HttpServerRequest</code>.  <br/>
+</p>
 <p>You can try it by running the verticle and pointing your browser at <code>http://localhost:8080</code>.</p>
 <p>Similarly to <code>NetServer</code>, the return value of the <code>requestHandler</code> method is the server itself, so multiple invocations can be chained together. That means we can rewrite the above with:</p>
 <pre class="prettyprint">val server = vertx.createHttpServer()
@@ -1297,7 +1310,8 @@ server.requestHandler({ request: HttpServerRequest =&gt;
 <p>The request object has a method <code>query()</code> which contains the query of the request. For example, if the request URI was:</p>
 <pre class="prettyprint">a/b/c/page.html?param1=abc&amp;param2=xyz
 </pre>
-<p>Then <code>request.query()</code> would return the string <code>param1=abc&amp;param2=xyz</code>    </p>
+<p>Then <code>request.query()</code> would return the string <code>param1=abc&amp;param2=xyz</code>  <br/>
+</p>
 <h4 id="request-headers">Request Headers</h4><br/>
 <p>The request headers are available using the <code>headers()</code> method on the request object.</p>
 <p>The returned object is an instance of <code>org.vertx.scala.core.MultiMap</code>. A MultiMap allows multiple values for the same key, unlike a normal Map.</p>
@@ -1312,8 +1326,10 @@ server.requestHandler({ request: HttpServerRequest =&gt;
 }).listen(8080, "localhost")
 </pre>
 <h4 id="request-params">Request params</h4><br/>
-<p>Similarly to the headers, the request parameters are available using the <code>params()</code> method on the request object.   </p>
-<p>The returned object is an instance of <code>org.vertx.scala.core.MultiMap</code>.   </p>
+<p>Similarly to the headers, the request parameters are available using the <code>params()</code> method on the request object. <br/>
+</p>
+<p>The returned object is an instance of <code>org.vertx.scala.core.MultiMap</code>. <br/>
+</p>
 <p>Request parameters are sent on the request URI, after the path. For example if the URI was:</p>
 <pre class="prettyprint">/page.html?param1=abc&amp;param2=xyz
 </pre>
@@ -1334,7 +1350,8 @@ param2: 'xyz
     })
 }).listen(8080, "localhost")
 </pre>
-<p>The <code>dataHandler</code> may be called more than once depending on the size of the body.    </p>
+<p>The <code>dataHandler</code> may be called more than once depending on the size of the body.  <br/>
+</p>
 <p>You'll notice this is very similar to how data from <code>NetSocket</code> is read. </p>
 <p>The request object implements the <code>ReadStream</code> interface so you can pump the request body to a <code>WriteStream</code>. See the chapter on <a href="#flow-control">streams and pumps</a> for a detailed explanation. </p>
 <p>In many cases, you know the body is not large and you just want to receive it in one go. To do this you could do something like the following:</p>
@@ -1393,8 +1410,10 @@ request.uploadHandler({ upload: HttpServerFileUpload =&gt;
     request.response().setStatusCode(739).setStatusMessage("Too many gerbils").end()
 }).listen(8080, "localhost")
 </pre>
-<p>You can also use the <code>setStatusMessage()</code> method to set the status message. If you do not set the status message a default message will be used.    </p>
-<p>The default value for <code>statusCode</code> is <code>200</code>.    </p>
+<p>You can also use the <code>setStatusMessage()</code> method to set the status message. If you do not set the status message a default message will be used.  <br/>
+</p>
+<p>The default value for <code>statusCode</code> is <code>200</code>.  <br/>
+</p>
 <h4 id="writing-http-responses">Writing HTTP responses</h4><br/>
 <p>To write data to an HTTP response, you invoke the <code>write</code> function. This function can be invoked multiple times before the response is ended. It can be invoked in a few ways:</p>
 <p>With a single buffer:</p>
@@ -1404,7 +1423,8 @@ request.response().write(myBuffer)
 <p>A string. In this case the string will encoded using UTF-8 and the result written to the wire.</p>
 <pre class="prettyprint">request.response().write("hello")
 </pre>
-<p>A string and an encoding. In this case the string will encoded using the specified encoding and the result written to the wire.     </p>
+<p>A string and an encoding. In this case the string will encoded using the specified encoding and the result written to the wire.   <br/>
+</p>
 <pre class="prettyprint">request.response().write("hello", "UTF-16")
 </pre>
 <p>The <code>write</code> function is asynchronous and always returns immediately after the write has been queued.</p>
@@ -1438,8 +1458,10 @@ request.response().headers().set("Hat colour", "Mauve")
 <p>You put the HTTP response into chunked mode as follows:</p>
 <pre class="prettyprint">req.response().setChunked(true)
 </pre>
-<p>Default is non-chunked. When in chunked mode, each call to <code>response.write(...)</code> will result in a new HTTP chunk being written out.  </p>
-<p>When in chunked mode you can also write HTTP response trailers to the response. These are actually written in the final chunk of the response.  </p>
+<p>Default is non-chunked. When in chunked mode, each call to <code>response.write(...)</code> will result in a new HTTP chunk being written out.<br/>
+</p>
+<p>When in chunked mode you can also write HTTP response trailers to the response. These are actually written in the final chunk of the response.<br/>
+</p>
 <p>To add trailers to the response, add them to the multimap returned from the <code>trailers()</code> method:</p>
 <pre class="prettyprint">request.response().trailers().add("Philosophy", "Solipsism")
 request.response().trailers().add("Favourite-Shakin-Stevens-Song", "Behind the Green Door")
@@ -1509,7 +1531,8 @@ client.setHost("foo.com")
     .setHost("foo.com")
 </pre>
 <p>A single <code>HttpClient</code> always connects to the same host and port. If you want to connect to different servers, create more instances.</p>
-<p>The default port is <code>80</code> and the default host is <code>localhost</code>. So if you don't explicitly set these values that's what the client will attempt to connect to.         </p>
+<p>The default port is <code>80</code> and the default host is <code>localhost</code>. So if you don't explicitly set these values that's what the client will attempt to connect to.       <br/>
+</p>
 <h3 id="pooling-and-keep-alive">Pooling and Keep Alive</h3><br/>
 <p>By default the <code>HttpClient</code> pools HTTP connections. As you make requests a connection is borrowed from the pool and returned when the HTTP response has ended.</p>
 <p>If you do not want connections to be pooled you can call <code>setKeepAlive</code> with <code>false</code>:</p>
@@ -1525,7 +1548,8 @@ client.setHost("foo.com")
                .setHost("foo.com")
                .setMaxPoolSize(10)
 </pre>
-<p>The default value is <code>1</code>.         </p>
+<p>The default value is <code>1</code>.       <br/>
+</p>
 <h3 id="closing-the-client">Closing the client</h3><br/>
 <p>Any HTTP clients created in a verticle are automatically closed for you when the verticle is stopped, however if you want to close it explicitly you can:</p>
 <pre class="prettyprint">client.close()
@@ -1574,11 +1598,13 @@ request.write(myBuffer)
 <p>A string. In this case the string will encoded using UTF-8 and the result written to the wire.</p>
 <pre class="prettyprint">request.write("hello")
 </pre>
-<p>A string and an encoding. In this case the string will encoded using the specified encoding and the result written to the wire.     </p>
+<p>A string and an encoding. In this case the string will encoded using the specified encoding and the result written to the wire.   <br/>
+</p>
 <pre class="prettyprint">request.write("hello", "UTF-16")
 </pre>
 <p>The <code>write</code> function is asynchronous and always returns immediately after the write has been queued. The actual write might complete some time later.</p>
-<p>If you are just writing a single string or Buffer to the HTTP request you can write it and end the request in a single call to the <code>end</code> function.   </p>
+<p>If you are just writing a single string or Buffer to the HTTP request you can write it and end the request in a single call to the <code>end</code> function. <br/>
+</p>
 <p>The first call to <code>write</code> will result in the request headers being written to the request. Consequently, if you are not using HTTP chunking then you must set the <code>Content-Length</code> header before writing to the request, since it will be too late otherwise. If you are using HTTP chunking you do not have to worry. </p>
 <h4 id="ending-http-requests">Ending HTTP requests</h4><br/>
 <p>Once you have finished with the HTTP request you must call the <code>end</code> function on it.</p>
@@ -1613,7 +1639,8 @@ request.end()
 <p>You put the HTTP request into chunked mode as follows:</p>
 <pre class="prettyprint">request.setChunked(true)
 </pre>
-<p>Default is non-chunked. When in chunked mode, each call to <code>request.write(...)</code> will result in a new HTTP chunk being written out.  </p>
+<p>Default is non-chunked. When in chunked mode, each call to <code>request.write(...)</code> will result in a new HTTP chunk being written out.<br/>
+</p>
 <h3 id="http-client-responses">HTTP Client Responses</h3><br/>
 <p>Client responses are received as an argument to the response handler that is passed into one of the request methods on the HTTP client.</p>
 <p>The response object implements <code>ReadStream</code>, so it can be pumped to a <code>WriteStream</code> like any other <code>ReadStream</code>.</p>
@@ -1826,7 +1853,8 @@ server.requestHandler(routeMatcher).listen(8080, "localhost")
 }).listen(8080, "localhost")
 </pre>
 <h3 id="headers-on-the-websocket">Headers on the websocket</h3><br/>
-<p>You can use the <code>headers()</code> method to retrieve the headers passed in the Http Request from the client that caused the upgrade to websockets.    </p>
+<p>You can use the <code>headers()</code> method to retrieve the headers passed in the Http Request from the client that caused the upgrade to websockets.  <br/>
+</p>
 <h2 id="websockets-on-the-http-client">WebSockets on the HTTP client</h2><br/>
 <p>To use WebSockets from the HTTP client, you create the HTTP client as normal, then call the <code>connectWebsocket</code> function, passing in the URI that you wish to connect to at the server, and a handler.</p>
 <p>The handler will then get called if the WebSocket successfully connects. If the WebSocket does not connect - perhaps the server rejects it - then any exception handler on the HTTP client will be called.</p>
@@ -1876,7 +1904,8 @@ server.requestHandler(routeMatcher).listen(8080, "localhost")
 val sockJSServer = vertx.createSockJSServer(httpServer)
 </pre>
 <p>Each SockJS server can host multiple <em>applications</em>.</p>
-<p>Each application is defined by some configuration, and provides a handler which gets called when incoming SockJS connections arrive at the server.      </p>
+<p>Each application is defined by some configuration, and provides a handler which gets called when incoming SockJS connections arrive at the server.    <br/>
+</p>
 <p>For example, to create a SockJS echo application:</p>
 <pre class="prettyprint">val httpServer = vertx.createHttpServer()
 
@@ -1896,7 +1925,8 @@ httpServer.listen(8080)
 <li><code>insert_JSESSIONID</code>: Some hosting providers enable sticky sessions only to requests that have JSESSIONID cookie set. This setting controls if the server should set this cookie to a dummy value. By default setting JSESSIONID cookie is enabled. More sophisticated beaviour can be achieved by supplying a function.</li>
 <li><code>session_timeout</code>: The server sends a <code>close</code> event when a client receiving connection have not been seen for a while. This delay is configured by this setting. By default the <code>close</code> event will be emitted when a receiving connection wasn't seen for 5 seconds.</li>
 <li><code>heartbeat_period</code>: In order to keep proxies and load balancers from closing long running http requests we need to pretend that the connecion is active and send a heartbeat packet once in a while. This setting controlls how often this is done. By default a heartbeat packet is sent every 5 seconds.</li>
-<li><code>max_bytes_streaming</code>: Most streaming transports save responses on the client side and don't free memory used by delivered messages. Such transports need to be garbage-collected once in a while. <code>max_bytes_streaming</code> sets a minimum number of bytes that can be send over a single http streaming request before it will be closed. After that client needs to open new request. Setting this value to one effectively disables streaming and will make streaming transports to behave like polling transports. The default value is 128K.    </li>
+<li><code>max_bytes_streaming</code>: Most streaming transports save responses on the client side and don't free memory used by delivered messages. Such transports need to be garbage-collected once in a while. <code>max_bytes_streaming</code> sets a minimum number of bytes that can be send over a single http streaming request before it will be closed. After that client needs to open new request. Setting this value to one effectively disables streaming and will make streaming transports to behave like polling transports. The default value is 128K.  <br/>
+</li>
 <li><code>library_url</code>: Transports which don't support cross-domain communication natively ('eventsource' to name one) use an iframe trick. A simple page is served from the SockJS server (using its foreign domain) and is placed in an invisible iframe. Code run from this iframe doesn't need to worry about cross-domain issues, as it's being run from domain local to the SockJS server. This iframe also does need to load SockJS javascript client library, and this option lets you specify its url (if you're unsure, point it to the latest minified SockJS client release, this is the default). The default value is <code>http://cdn.sockjs.org/sockjs-0.3.4.min.js</code></li>
 </ul>
 <h2 id="reading-and-writing-data-from-a-sockjs-server">Reading and writing data from a SockJS server</h2><br/>
@@ -1920,7 +1950,8 @@ httpServer.listen(8080)
    };
 &lt;/script&gt;
 </pre>
-<p>As you can see the API is very similar to the WebSockets API.    </p>
+<p>As you can see the API is very similar to the WebSockets API.  <br/>
+</p>
 <h1 id="sockjs-eventbus-bridge">SockJS - EventBus Bridge</h1><br/>
 <h2 id="setting-up-the-bridge">Setting up the Bridge</h2><br/>
 <p>By connecting up SockJS and the Vert.x event bus we create a distributed event bus which not only spans multiple Vert.x instances on the server side, but can also include client side JavaScript running in browsers.</p>
@@ -1969,7 +2000,8 @@ server.listen(8080)
 </pre>
 <p>The parameter to the constructor is the URI where to connect to the event bus. Since we create our bridge with the prefix <code>eventbus</code> we will connect there.</p>
 <p>You can't actually do anything with the bridge until it is opened. When it is open the <code>onopen</code> handler will be called.</p>
-<p>The client side event bus API for registering and unregistering handlers and for sending messages is the same as the server side one. Please consult the chapter on the event bus for full information.    </p>
+<p>The client side event bus API for registering and unregistering handlers and for sending messages is the same as the server side one. Please consult the chapter on the event bus for full information.  <br/>
+</p>
 <p><strong>There is one more thing to do before getting this working, please read the following section....</strong></p>
 <h2 id="securing-the-bridge">Securing the Bridge</h2><br/>
 <p>If you started a bridge like in the above example without securing it, and attempted to send messages through it you'd find that the messages mysteriously disappeared. What happened to them?</p>
@@ -2057,7 +2089,8 @@ vertx.createSockJSServer(server).bridge(config, permitted, permitted)
   requires_auth: true
 }
 </pre>
-<p>This tells the bridge that any messages to save orders in the <code>orders</code> collection, will only be passed if the user is successful authenticated (i.e. logged in ok) first.    </p>
+<p>This tells the bridge that any messages to save orders in the <code>orders</code> collection, will only be passed if the user is successful authenticated (i.e. logged in ok) first.  <br/>
+</p>
 <h1 id="file-system">File System</h1><br/>
 <p>Vert.x lets you manipulate files on the file system. File system operations are asynchronous and take a handler function as the last argument. This function will be called when the operation is complete, or an error has occurred.</p>
 <p>The argument passed into the handler is an instance of <code>org.vertx.scala.core.AsyncResult</code>.</p>
@@ -2104,7 +2137,8 @@ vertx.createSockJSServer(server).bridge(config, permitted, permitted)
 r--r--r--
 </pre>
 <ul>
-<li><code>chmod(file, perms, dirPerms, handler)</code>.  </li>
+<li><code>chmod(file, perms, dirPerms, handler)</code>.<br/>
+</li>
 </ul>
 <p>Recursively change permissionson a directory. <code>file</code> is the directory name. <code>perms</code> is a Unix style permissions to apply recursively to any files in the directory. <code>dirPerms</code> is a Unix style permissions string to apply to the directory and any other child directories recursively.</p>
 <h2 id="props">props</h2><br/>
@@ -2214,7 +2248,8 @@ r--r--r--
     }
 })
 </pre>
-<p>The filter is a regular expression.    </p>
+<p>The filter is a regular expression.  <br/>
+</p>
 <h2 id="readfile">readFile</h2><br/>
 <p>Read the entire contents of a file in one go. <em>Be careful if using this with large files since the entire file will be stored in memory at once</em>.</p>
 <p><code>readFile(file)</code>. Where <code>file</code> is the file name of the file to read.</p>
@@ -2266,7 +2301,7 @@ r--r--r--
 })
 </pre>
 <h2 id="open">open</h2><br/>
-<p>Opens an asynchronous file for reading \ writing.</p>
+<p>Opens an asynchronous file for reading  writing.</p>
 <p>This function can be called in four different ways:</p>
 <ul>
 <li><code>open(file, handler)</code></li>
@@ -2420,7 +2455,8 @@ client.lookup4("vertx.io", { ar: AsyncResult[Inet4Address] =&gt;
     }
 })
 </pre>
-<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.  </p>
+<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.<br/>
+</p>
 <h2 id="lookup6">lookup6</h2><br/>
 <p>Try to lookup the AAAA (ipv5) record for a given name. The first which is returned will be used, so it behaves the same way as you may be used from when using "nslookup" on your operation system.</p>
 <p>To lookup the A record for "vertx.io" you would typically use it like:</p>
@@ -2433,7 +2469,8 @@ client.lookup6("vertx.io", { ar: AsyncResult[Inet6Address] =&gt;
     }
 })
 </pre>
-<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.  </p>
+<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.<br/>
+</p>
 <h2 id="resolvea">resolveA</h2><br/>
 <p>Try to resolve all A (ipv4) records for a given name. This is quite similar to using "dig" on unix like operation systems.</p>
 <p>To lookup all the A records for "vertx.io" you would typically do:</p>
@@ -2448,7 +2485,8 @@ client.resolveA("vertx.io", { ar: AsyncResult[List[Inet4Address]] =&gt;
     }
 })
 </pre>
-<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.  </p>
+<p>As it only resolves A records and so is ipv4 only it will use Inet4Address as result.<br/>
+</p>
 <h2 id="resolveaaaa">resolveAAAA</h2><br/>
 <p>Try to resolve all AAAA (ipv6) records for a given name. This is quite similar to using "dig" on unix like operation systems.</p>
 <p>To lookup all the AAAAA records for "vertx.io" you would typically do:</p>
@@ -2463,7 +2501,8 @@ client.resolveAAAA("vertx.io", { ar: AsyncResult[List[Inet6Address]] =&gt;
     }
 })
 </pre>
-<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.  </p>
+<p>As it only resolves AAAA records and so is ipv6 only it will use Inet6Address as result.<br/>
+</p>
 <h2 id="resolvecname">resolveCNAME</h2><br/>
 <p>Try to resolve all CNAME records for a given name. This is quite similar to using "dig" on unix like operation systems.</p>
 <p>To lookup all the CNAME records for "vertx.io" you would typically do:</p>

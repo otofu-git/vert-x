@@ -330,7 +330,8 @@ vertx.createHttpServer().requestHandler(function(req) {
 }
 </pre>
 <p>A module can include many other modules - <code>includes</code> is a comma-separated list of module names.</p>
-<p>If a jar is include more than once from different modules, a warning will be issued.    </p>
+<p>If a jar is include more than once from different modules, a warning will be issued.  <br/>
+</p>
 <p>Modules that <em>only</em> contain resources for re-use are called <em>non-runnable</em> modules and they don't require a <code>main</code> field in <code>mod.json</code>. It's also possible to include the resources of runnable modules into another module.</p>
 <h1 id="running-a-module-from-the-command-line">Running a module from the command line</h1><br/>
 <p>Modules can be run directly by using the command <code>vertx runmod</code>. Please see the <a href="manual.html#running-mods">main manual</a> for a full description of this.</p>
