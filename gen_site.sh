@@ -1,17 +1,17 @@
 #!/bin/sh
 
-./gen_section.sh vertx1x_docs/docs_md/manual.md vertx1x_docs/manual_templ.html vertx1x_docs/manual.html
-./gen_section.sh vertx1x_docs/docs_md/mods_manual.md vertx1x_docs/mods_manual_templ.html vertx1x_docs/mods_manual.html
-./gen_section.sh vertx1x_docs/docs_md/core_manual_js.md vertx1x_docs/core_manual_js_templ.html vertx1x_docs/core_manual_js.html
-./gen_section.sh vertx1x_docs/docs_md/core_manual_ruby.md vertx1x_docs/core_manual_ruby_templ.html vertx1x_docs/core_manual_ruby.html
-./gen_section.sh vertx1x_docs/docs_md/core_manual_python.md vertx1x_docs/core_manual_python_templ.html vertx1x_docs/core_manual_python.html
-./gen_section.sh vertx1x_docs/docs_md/core_manual_java.md vertx1x_docs/core_manual_java_templ.html vertx1x_docs/core_manual_java.html
-./gen_section.sh vertx1x_docs/docs_md/core_manual_groovy.md vertx1x_docs/core_manual_groovy_templ.html vertx1x_docs/core_manual_groovy.html
-./gen_section.sh vertx1x_docs/docs_md/install.md vertx1x_docs/install_manual_templ.html vertx1x_docs/install.html
-./gen_section.sh vertx1x_docs/docs_md/js_web_tutorial.md vertx1x_docs/js_web_tutorial_templ.html vertx1x_docs/js_web_tutorial.html
-./gen_section.sh vertx1x_docs/docs_md/ruby_web_tutorial.md vertx1x_docs/ruby_web_tutorial_templ.html vertx1x_docs/ruby_web_tutorial.html
-./gen_section.sh vertx1x_docs/docs_md/python_web_tutorial.md vertx1x_docs/python_web_tutorial_templ.html vertx1x_docs/python_web_tutorial.html
-./gen_section.sh vertx1x_docs/docs_md/groovy_web_tutorial.md vertx1x_docs/groovy_web_tutorial_templ.html vertx1x_docs/groovy_web_tutorial.html
+# ./gen_section.sh vertx1x_docs/docs_md/manual.md vertx1x_docs/manual_templ.html vertx1x_docs/manual.html
+# ./gen_section.sh vertx1x_docs/docs_md/mods_manual.md vertx1x_docs/mods_manual_templ.html vertx1x_docs/mods_manual.html
+# ./gen_section.sh vertx1x_docs/docs_md/core_manual_js.md vertx1x_docs/core_manual_js_templ.html vertx1x_docs/core_manual_js.html
+# ./gen_section.sh vertx1x_docs/docs_md/core_manual_ruby.md vertx1x_docs/core_manual_ruby_templ.html vertx1x_docs/core_manual_ruby.html
+# ./gen_section.sh vertx1x_docs/docs_md/core_manual_python.md vertx1x_docs/core_manual_python_templ.html vertx1x_docs/core_manual_python.html
+# ./gen_section.sh vertx1x_docs/docs_md/core_manual_java.md vertx1x_docs/core_manual_java_templ.html vertx1x_docs/core_manual_java.html
+# ./gen_section.sh vertx1x_docs/docs_md/core_manual_groovy.md vertx1x_docs/core_manual_groovy_templ.html vertx1x_docs/core_manual_groovy.html
+# ./gen_section.sh vertx1x_docs/docs_md/install.md vertx1x_docs/install_manual_templ.html vertx1x_docs/install.html
+# ./gen_section.sh vertx1x_docs/docs_md/js_web_tutorial.md vertx1x_docs/js_web_tutorial_templ.html vertx1x_docs/js_web_tutorial.html
+# ./gen_section.sh vertx1x_docs/docs_md/ruby_web_tutorial.md vertx1x_docs/ruby_web_tutorial_templ.html vertx1x_docs/ruby_web_tutorial.html
+# ./gen_section.sh vertx1x_docs/docs_md/python_web_tutorial.md vertx1x_docs/python_web_tutorial_templ.html vertx1x_docs/python_web_tutorial.html
+# ./gen_section.sh vertx1x_docs/docs_md/groovy_web_tutorial.md vertx1x_docs/groovy_web_tutorial_templ.html vertx1x_docs/groovy_web_tutorial.html
 
 
 ./gen_section.sh docs_md/manual.md manual_templ.html manual.html
